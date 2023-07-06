@@ -1,0 +1,23 @@
+.modalAppear{
+    animation: slowAppear 0.3s linear forwards;
+}
+@keyframes slowAppear{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.overlayDilute{
+    animation: overlayDilute 0.3s linear forwards;
+}
+@keyframes overlayDilute{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0.8;
+    }
+}

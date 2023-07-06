@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- css -->
+        <link href="style.css" rel="stylesheet">
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!-- fontawesome -->
+        <link href="https://use.fontawesome.com/releases/v5.13.0/css/all.css" rel="stylesheet">
+        <!-- Vue.js CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <!-- jsファイルの読み込み -->
+        <script src="receiptVue.js" defer></script>
+        <script src="modal.js" defer></script>
+        
+        <title>ReceiptScreen</title>
+    </head>
+
+    <body class="bg-dark">
+        <div class="w-100 min-vh-100 d-flex justify-content-center align-items-center" id="app">
+            <!-- overlay -->
+            <div id="overlay" class="w-100 h-100 position-fixed bg-dark d-none">
+            </div>
+            <!-- modal-window -->
+            <div id="modal-content" class="container w-50 position-fixed bg-dark z-1000 px-3 py-4 rounded d-none">
+                <!-- title&close -->
+                <div class="d-flex justify-content-between text-white">
+                    <h5>User info</h5>
+                    <div class="row mb-3">
+                        <div class="d-flex justify-content-end">
+                            <button type="button" aria-label="Close" id="modal-close">
+                                <span aria-hidden="true">&times;</span>
+                             </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- OurName -->
+                <div class="row mb-3">
+                    <label for="toAdress" class="col-2 text-start col-form-label text-white">OurName:</label>
+                    <div class="col-9">
+                        <input type="text" class="form-control" id="toAdress" v-model="toAdress">
+                    </div>
+                </div>
+
+                <!-- date -->
+                <div class="row mb-3">
+                    <label for="inputDate" class="col-2 text-stert col-form-label text-white">date: </label>
+                    <div class="col-9">
+                        <input type="date" class="form-control" id="inputDate" v-model="date">
+                    </div>
+                </div>
+
+                <!-- money -->
+                <div class="row mb-3">
+                    <label for="inputMoney" class="col-2 text-start col-form-label text-white">money:</label>
+                    <div class="col-9">
+                        <input type="number" class="form-control" id="inputMoney" placeholder="Enter amount" v-model="money">
+                    </div>
+                </div>
+
+                <!-- reason -->
+                <div class="row mb-3">
+                    <label for="inputReason" class="col-2 text-stert col-form-label text-white">reason: </label>
+                    <div class="col-9">
+                        <textarea class="form-control" id="inputReason" rows="3" placeholder="Ex) Parking Fee" v-model="reason"></textarea>
+                    </div>
+                </div>
+
+                <!-- seal -->
+                <div class="row mb-3">
+                    <label for="toSeal" class="col-2 col-form-label text-white">Seal: </label>
+                    <div class="col-9 mt-2">
+                        <!-- あり -->
+                        <div class="form-cheack form-check-inline">
+                            <input type="radio" class="form-cheack-input" name="Seal" id="inlineRadio1" value="true" v-model="whichSeal">
+                            <label for="inlineRadio1" class="form-cheack-label text-white">あり</label>
+                        </div>
+
+                        <!-- なし -->
+                        <div class="form-cheack form-check-inline">
+                            <input type="radio" class="form-cheack-input" name="Seal" id="inlineRadio2" value="false" v-model="whichSeal" checked>
+                            <label for="inlineRadio2" class="form-cheack-label text-white">なし</label>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <!-- main -->
+            <div class='container my-4 p-3 border border-dark bg-light'>
+                <div class="d-flex justify-content-between pe-3">
+                    <h2 class="my-3">領収書の作成画面</h2>
+                    <img src="./image/ei-settings.png" height="40rem" width="40rem" class="rounded-circle" id="modal-open">
+                    <!-- <button class="btn btn-info" onclick="modalOpen()">test</button> -->
+                </div>
+
+                <div class="d-flex flex-wrap">
+                    <!-- 入力screen -->
+                    <div class="col-4 container py-2 border rounded shadow">
+                        <h5 class="pb-3">承認エリア</h5>
+
+                        <!-- fromID -->
+                        <div class="row mb-3">
+                            <label for="fromID" class="col-2 text-start col-form-label">ID:</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="fromID" placeholder="1234567" v-model="fromID">
+                            </div>
+                        </div>
+
+                        <!-- fromPass -->
+                        <div class="row mb-3">
+                            <label for="fromPass" class="col-2 text-start col-form-label">Pass:</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" id="fromPass" placeholder="password" v-model="fromPass">
+                                <div class="invalid-feedback">IDまたはパスワードが間違っています</div>
+                            </div>
+                        </div>
+
+                        <!-- admin -->
+                        <div class="d-flex justify-content-center mt-5" v-on:click="login">
+                            <button class="btn btn-dark my-2 py-2 col-8">承認</button>
+                        </div>
+
+                        <h1 class="text-center m-0">↓</h1>
+
+                        <!-- receiptインスタンスの作成 -->
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary my-2 py-2 col-8" id="create" v-on:click="makeReceiptObject">作成</button>
+                        </div>
+
+                    </div>
+
+                    <!-- 出力screen -->
+                    <div class="col-8 d-flex py-2 justify-content-center">
+                        <div class="d-flex flex-column w-100 align-items-center">
+                            
+                            <div style="width: 40rem;" id="output" class="mb-5">
+                                <div class="m-2 py-3 px-4 container border border-5 rounded shadow">
+                                    
+                                    <!-- 番号と領収日 -->
+                                    <div class="row">
+                                        <div class="d-flex">
+                                            <h1 class="col-3 my-auto">領収書</h1>
+                                            <div class="d-flex flex-column col-9">
+                                                <h5 class="text-end">No: {{ number }}</h5>
+                                                <h5 class="text-end"> {{ date }} </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <!-- 宛先 -->
+                                    <div class="row mt-4">
+                                        <h5 class="border-bottom border-3"> {{ toAdress }} 御中</h5>
+                                    </div>
+        
+                                    <!-- 金額 -->
+                                    <div class="row mt-4">
+                                        <h2 class="text-center"> \ {{ money }} </h2>
+                                    </div>
+        
+                                    <!-- 取引内容 -->
+                                    <div class="row mt-4 bm-0">
+                                        <h5>但: {{ reason }}</h5>
+                                    </div>
+        
+                                    <!-- 会社の住所とはんこ -->
+                                    <div class="row mt-0">
+                                            <!-- 住所 -->
+                                            <div class="d-flex flex-column text-center col-8">
+                                                <p class="w-100 m-0"> {{ fromName }} </p>
+                                                <p class="w-100 m-0"> 〒 {{ fromPostCode }} </p>
+                                                <p class="w-100 m-0"> {{ fromAdress }} </p>
+                                            </div>
+
+                                            <!-- 自分のはんこ -->
+                                            <div class="col-2 d-flex flex-column align-items-center border">
+                                                <p>自分</p>
+                                                <img src="./image/fukaya_kaisyo-l-size.png" height="40rem" width="40rem" id="ourSeal" v-if="whichSeal == 'true'">
+                                            </div>
+
+                                            <!-- 相手のはんこ -->
+                                            <div class="col-2 d-flex flex-column align-items-center border">
+                                                <p>相手</p>
+                                                <img src="./image/ishihara_kaisyo-l-size.png" height="40rem" width="40rem" id="partnerSeal" :class="{'d-none':fromSeal}">
+                                            </div>
+                                    </div>
+        
+                                </div>
+                            </div>
+                            
+                            
+
+                            <!-- receiptの数だけ回す -->
+                            <div v-for="item in receipts">
+                                <h4>作成物 {{ item.number + 1}}</h4>
+                                <card :item="item"></card>
+                            </div>
+
+                        </div>
+
+
+                            
+
+                    </div> 
+                </div>
+
+                
+
+                
+            </div>
+
+        </div>
+    </body>
+</html>

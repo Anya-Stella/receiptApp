@@ -22,4 +22,5 @@
 大切な人との時間を大切に過ごせるかもしれません。
 
 ![スクリーンショット (43)](https://github.com/Anya-Stella/receiptApp/assets/113976187/9c9cf868-d619-42b8-b9f6-60f39af55ebe)
-
+![スクリーンショット (44)](https://github.com/Anya-Stella/receiptApp/assets/113976187/292f8052-ca08-4c29-bea7-41cf2c470111)
+![スクリーンショット (46)](https://github.com/Anya-Stella/receiptApp/assets/113976187/01bb20a5-674b-4cb9-91e2-1234e6dee5a4)

@@ -1,4 +1,5 @@
 # receiptApp
+[receiptAPP](https://anya-stella.github.io/receiptApp/receipt.html)
 https://anya-stella.github.io/receiptApp/receipt.html  
 これは領収書の為の(デモ)アプリです。
 

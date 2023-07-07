@@ -27,7 +27,7 @@ https://anya-stella.github.io/receiptApp/receipt.html
 ![スクリーンショット (43)](https://github.com/Anya-Stella/receiptApp/assets/113976187/9c9cf868-d619-42b8-b9f6-60f39af55ebe)
 2:モーダルで設定を書き込む
 ![スクリーンショット (44)](https://github.com/Anya-Stella/receiptApp/assets/113976187/292f8052-ca08-4c29-bea7-41cf2c470111)
-3:両社の判子の押されたpdfが作られる
+3:ログイン認証に成功すると、両社の判子の押されたpdfが作られる
 ![スクリーンショット (46)](https://github.com/Anya-Stella/receiptApp/assets/113976187/01bb20a5-674b-4cb9-91e2-1234e6dee5a4)
 
 # このアプリについて少し語ります。

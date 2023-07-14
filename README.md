@@ -29,6 +29,9 @@ https://anya-stella.github.io/receiptApp/receipt.html
 ![スクリーンショット (44)](https://github.com/Anya-Stella/receiptApp/assets/113976187/292f8052-ca08-4c29-bea7-41cf2c470111)
 3:ログイン認証に成功すると、両社の判子の押されたpdfが作られる
 ![スクリーンショット (46)](https://github.com/Anya-Stella/receiptApp/assets/113976187/01bb20a5-674b-4cb9-91e2-1234e6dee5a4)
+登録されているIDとpassword(確認用):  
+ID : 1234aaa
+password : 2000555
 
 # このアプリについて少し語ります。
 皆さん初めましてanya-stellaです。
